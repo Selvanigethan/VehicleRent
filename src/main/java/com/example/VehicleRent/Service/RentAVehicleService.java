@@ -1,20 +1,17 @@
 package com.example.VehicleRent.Service;
 
 import com.example.VehicleRent.Model.Vehicle;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Service
 public class RentAVehicleService {
 
-    private List<Vehicle> vehicles = new ArrayList<>();
-
-    public List<Vehicle> getVehicles() {
-        return vehicles;
-    }
+    private final List<Vehicle> vehicles = new ArrayList<>();
 
     public void addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
