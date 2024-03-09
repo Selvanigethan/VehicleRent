@@ -15,4 +15,7 @@ public class Vehicle {
     private int number;
     private Year makeYear;
 
+    private int vehicleId;
+    private boolean isAvailable;
+
 }
