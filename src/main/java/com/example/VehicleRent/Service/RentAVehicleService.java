@@ -13,7 +13,7 @@ public class RentAVehicleService {
 
     private final List<Vehicle> vehicles = new ArrayList<>();
 
-    public void addVehicle(Vehicle vehicle) {
+    public boolean addVehicle(Vehicle vehicle) {
         for (Vehicle vehicleInList : vehicles) {
             if (vehicleInList.getVehicleId() == vehicle.getVehicleId()) {
                 throw new RuntimeException("Vehicle with the vehicle id is already available");
@@ -21,6 +21,7 @@ public class RentAVehicleService {
         }
         vehicle.setAvailable(true);
         vehicles.add(vehicle);
+        return true;
     }
 
     public boolean disableVehicle(int vehicleId) {
