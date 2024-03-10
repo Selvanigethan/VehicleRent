@@ -38,4 +38,9 @@ public class RentAVehicleController {
         rentAVehicleService.enableVehicle(vehicleId);
     }
 
+    @DeleteMapping("/delete/{vehicleId}")
+    public void deleteVehicle(@PathVariable int vehicleId) {
+        rentAVehicleService.deleteVehicle(vehicleId);
+    }
+
 }

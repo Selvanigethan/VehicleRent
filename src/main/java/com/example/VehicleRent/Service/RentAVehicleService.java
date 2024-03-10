@@ -30,7 +30,7 @@ public class RentAVehicleService {
                 return true;
             }
         }
-        throw new RuntimeException("Vehicle with the Id was not found");
+        return false;
     }
 
     public boolean enableVehicle(int vehicleId) {
@@ -40,7 +40,16 @@ public class RentAVehicleService {
                 return true;
             }
         }
-        throw new RuntimeException("Vehicle with the Id was not found");
+        return false;
     }
 
+    public boolean deleteVehicle(int vehicleId) {
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.getVehicleId() == vehicleId) {
+                vehicles.remove(vehicle);
+                return true;
+            }
+        }
+        return false;
+    }
 }
