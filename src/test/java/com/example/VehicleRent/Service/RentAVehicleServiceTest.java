@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -14,6 +13,9 @@ public class RentAVehicleServiceTest {
 
     @Mock
     Vehicle vehicleOne;
+
+    @Mock
+    Vehicle vehicleTwo;
 
     RentAVehicleService rentAVehicleService = new RentAVehicleService();
 
@@ -23,12 +25,20 @@ public class RentAVehicleServiceTest {
     }
 
     @Test
-    void testAddVehicle() {
+    void testAddVehicleTrue() {
         when(vehicleOne.getVehicleId()).thenReturn(1100);
         assertTrue(rentAVehicleService.addVehicle(vehicleOne));
         assertEquals(1, rentAVehicleService.getVehicles().size());
         assertEquals(1100, rentAVehicleService.getVehicles().get(0).getVehicleId());
     }
 
+    @Test
+    void testAddVehicleFalse() {
+        when(vehicleOne.getVehicleId()).thenReturn(1100);
+        when(vehicleTwo.getVehicleId()).thenReturn(1100);
+        rentAVehicleService.addVehicle(vehicleOne);
+        assertFalse(rentAVehicleService.addVehicle(vehicleTwo));
+        assertEquals(1, rentAVehicleService.getVehicles().size());
+    }
 
 }

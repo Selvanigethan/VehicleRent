@@ -16,7 +16,7 @@ public class RentAVehicleService {
     public boolean addVehicle(Vehicle vehicle) {
         for (Vehicle vehicleInList : vehicles) {
             if (vehicleInList.getVehicleId() == vehicle.getVehicleId()) {
-                throw new RuntimeException("Vehicle with the vehicle id is already available");
+                return false;
             }
         }
         vehicle.setAvailable(true);
