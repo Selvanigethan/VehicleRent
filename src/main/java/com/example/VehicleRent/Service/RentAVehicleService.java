@@ -1,26 +1,34 @@
 package com.example.VehicleRent.Service;
 
 import com.example.VehicleRent.Model.Vehicle;
-import lombok.Getter;
+import com.example.VehicleRent.Repository.VehicleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Service
 public class RentAVehicleService {
 
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
     private final List<Vehicle> vehicles = new ArrayList<>();
 
+    public List<Vehicle> getVehicles() {
+        return vehicleRepository.findAll();
+    }
+
     public boolean addVehicle(Vehicle vehicle) {
-        for (Vehicle vehicleInList : vehicles) {
+        List<Vehicle> vehiclesFromRepo = vehicleRepository.findAll();
+        for (Vehicle vehicleInList : vehiclesFromRepo) {
             if (vehicleInList.getVehicleId() == vehicle.getVehicleId()) {
                 return false;
             }
         }
         vehicle.setAvailable(true);
-        vehicles.add(vehicle);
+        vehicleRepository.save(vehicle);
         return true;
     }
 
