@@ -5,7 +5,6 @@ import com.example.VehicleRent.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,8 +12,6 @@ public class RentAVehicleService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
-
-    private final List<Vehicle> vehicles = new ArrayList<>();
 
     public List<Vehicle> getVehicles() {
         return vehicleRepository.findAll();
@@ -41,9 +38,10 @@ public class RentAVehicleService {
     }
 
     public boolean deleteVehicle(int vehicleId) {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle.getVehicleId() == vehicleId) {
-                vehicles.remove(vehicle);
+        List<Vehicle> vehiclesFromRepo = vehicleRepository.findAll();
+        for (Vehicle vehicleInList : vehiclesFromRepo) {
+            if (vehicleInList.getVehicleId() == vehicleId) {
+                vehicleRepository.deleteById(vehicleId);
                 return true;
             }
         }
