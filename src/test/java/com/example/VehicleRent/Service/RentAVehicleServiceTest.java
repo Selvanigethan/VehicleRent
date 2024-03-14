@@ -13,7 +13,7 @@ public class RentAVehicleServiceTest {
     @Mock
     Vehicle vehicleTwo;
 
-    RentAVehicleService rentAVehicleService = new RentAVehicleService();
+    // RentAVehicleService rentAVehicleService = new RentAVehicleService();
 
 /*    @Test
     void testGetVehicles() {

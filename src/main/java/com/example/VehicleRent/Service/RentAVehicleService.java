@@ -10,8 +10,13 @@ import java.util.List;
 @Service
 public class RentAVehicleService {
 
+    //@Autowired
+    private final VehicleRepository vehicleRepository;
+
     @Autowired
-    private VehicleRepository vehicleRepository;
+    public RentAVehicleService(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
+    }
 
     public List<Vehicle> getVehicles() {
         return vehicleRepository.findAll();
