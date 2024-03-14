@@ -33,29 +33,29 @@ public class RentAVehicleService {
     }
 
     public boolean disableVehicle(int vehicleId) {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle.getVehicleId() == vehicleId) {
-                vehicle.setAvailable(false);
-                return true;
-            }
-        }
-        return false;
+        return changeVehicleAvailability(vehicleId, false);
     }
 
     public boolean enableVehicle(int vehicleId) {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle.getVehicleId() == vehicleId) {
-                vehicle.setAvailable(true);
-                return true;
-            }
-        }
-        return false;
+        return changeVehicleAvailability(vehicleId, true);
     }
 
     public boolean deleteVehicle(int vehicleId) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 vehicles.remove(vehicle);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean changeVehicleAvailability(int vehicleId, boolean inputBoolean) {
+        List<Vehicle> vehiclesFromRepo = vehicleRepository.findAll();
+        for (Vehicle vehicleInList : vehiclesFromRepo) {
+            if (vehicleInList.getVehicleId() == vehicleId) {
+                vehicleInList.setAvailable(inputBoolean);
+                vehicleRepository.save(vehicleInList);
                 return true;
             }
         }
