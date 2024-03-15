@@ -18,6 +18,7 @@ public class RentAVehicleController {
         this.rentAVehicleService = rentAVehicleService;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000") //just allowing a browser UI app to access the end point surviving cors
     @GetMapping("/vehicles")
     public List<Vehicle> getVehicles() {
         return rentAVehicleService.getVehicles();
